@@ -13,16 +13,20 @@ app.use(
   })
 );
 
-const mongoURI = "mongodb://localhost:27017/mernlogin";
+const mongoURI = "mongodb://localhost:27017/login";
 mongoose
   .connect(mongoURI, { useNewUrlParser: true })
   .then(() => console.log("Mongodb Connected"))
   .catch(err => console.log(err));
 
 var Users = require("./routes/Users");
+var sigin = require("./routes/signin");
 
+app.use("/siginin", sigin);
 app.use("/users", Users);
 
 app.listen(port, () => {
   console.log("successfully started on 5000");
 });
+
+module.exports = app;
